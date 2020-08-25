@@ -1,7 +1,7 @@
 module "elasticsearch" {
-    source = "../terraform-aws-elasticsearch/"
+    source = "git::https://github.com/lgallard/terraform-aws-elasticsearch.git"
 
-    domain_name           = "subbu-es-vpc"
+    domain_name           = var.es_domain_name
     vpc_options_subnet_ids = [ aws_subnet.private01.*.id[0],aws_subnet.private02.*.id[1] ]
     vpc_options_security_group_ids = [ aws_security_group.es_sg.id ]
     cluster_config_zone_awareness_enabled = true

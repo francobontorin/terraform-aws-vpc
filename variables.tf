@@ -72,3 +72,8 @@ variable "tags" {
   type        = map(string)
   description = "Extra tags to attach to the VPC resources"
 }
+
+variable "es_domain_name" {
+  description = "Name of the domain"
+  type        = string
+}
