@@ -133,8 +133,8 @@ module "vpc" {
   outpost_az      = data.aws_outposts_outpost.shared.availability_zone
 
   # IPv6
-  enable_ipv6                                    = true
-  outpost_subnet_assign_ipv6_address_on_creation = true
+  enable_ipv6                                    = false
+  outpost_subnet_assign_ipv6_address_on_creation = false
   outpost_subnet_ipv6_prefixes                   = [2, 3, 4]
 
   # NAT Gateway
