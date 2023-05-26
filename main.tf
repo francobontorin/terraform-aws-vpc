@@ -904,14 +904,13 @@ resource "aws_subnet" "outpost" {
 
   assign_ipv6_address_on_creation                = var.enable_ipv6 && var.outpost_subnet_ipv6_native ? true : var.outpost_subnet_assign_ipv6_address_on_creation
   availability_zone                              = var.outpost_az
-  cidr_block                                     = var.outpost_subnet_ipv6_native ? null : element(concat(var.outpost_subnets, [""]), count.index)
+  cidr_block                                     = element(concat(var.outpost_subnets, [""]), count.index)
   customer_owned_ipv4_pool                       = var.customer_owned_ipv4_pool
   enable_dns64                                   = var.enable_ipv6 && var.outpost_subnet_enable_dns64
   enable_resource_name_dns_aaaa_record_on_launch = var.enable_ipv6 && var.outpost_subnet_enable_resource_name_dns_aaaa_record_on_launch
   enable_resource_name_dns_a_record_on_launch    = !var.outpost_subnet_ipv6_native && var.outpost_subnet_enable_resource_name_dns_a_record_on_launch
   ipv6_cidr_block                                = var.enable_ipv6 && length(var.outpost_subnet_ipv6_prefixes) > 0 ? cidrsubnet(aws_vpc.this[0].ipv6_cidr_block, 8, var.outpost_subnet_ipv6_prefixes[count.index]) : null
   ipv6_native                                    = var.enable_ipv6 && var.outpost_subnet_ipv6_native
-  map_customer_owned_ip_on_launch                = var.map_customer_owned_ip_on_launch
   outpost_arn                                    = var.outpost_arn
   private_dns_hostname_type_on_launch            = var.outpost_subnet_private_dns_hostname_type_on_launch
   vpc_id                                         = local.vpc_id
