@@ -903,14 +903,9 @@ resource "aws_subnet" "outpost" {
   count = local.create_outpost_subnets ? local.len_outpost_subnets : 0
 
   availability_zone                              = var.outpost_az
- #cidr_block                                     = element(concat(var.outpost_subnets, [""]), count.index)
   cidr_block                                     = element(concat(var.outpost_subnets, [""]), count.index)
-  enable_dns64                                   = var.enable_ipv6 && var.outpost_subnet_enable_dns64
-  enable_resource_name_dns_aaaa_record_on_launch = var.enable_ipv6 && var.outpost_subnet_enable_resource_name_dns_aaaa_record_on_launch
-  enable_resource_name_dns_a_record_on_launch    = !var.outpost_subnet_ipv6_native && var.outpost_subnet_enable_resource_name_dns_a_record_on_launch
   outpost_arn                                    = var.outpost_arn
-  private_dns_hostname_type_on_launch            = var.outpost_subnet_private_dns_hostname_type_on_launch
-  vpc_id                                         = local.vpc_id
+  vpc_id                                         = aws_vpc.this[0].id
 
   tags = merge(
     {
