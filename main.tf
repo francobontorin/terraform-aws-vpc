@@ -905,7 +905,6 @@ resource "aws_subnet" "outpost" {
   assign_ipv6_address_on_creation                = var.enable_ipv6 && var.outpost_subnet_ipv6_native ? true : var.outpost_subnet_assign_ipv6_address_on_creation
   availability_zone                              = var.outpost_az
   cidr_block                                     = element(concat(var.outpost_subnets, [""]), count.index)
-  customer_owned_ipv4_pool                       = var.customer_owned_ipv4_pool
   enable_dns64                                   = var.enable_ipv6 && var.outpost_subnet_enable_dns64
   enable_resource_name_dns_aaaa_record_on_launch = var.enable_ipv6 && var.outpost_subnet_enable_resource_name_dns_aaaa_record_on_launch
   enable_resource_name_dns_a_record_on_launch    = !var.outpost_subnet_ipv6_native && var.outpost_subnet_enable_resource_name_dns_a_record_on_launch
