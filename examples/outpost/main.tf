@@ -128,7 +128,6 @@ module "vpc" {
   public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 4)]
 
   # Outpost is using single AZ specified in `outpost_az`
-  outpost_subnets = ["10.0.50.0/24", "10.0.51.0/24"]
   outpost_arn     = data.aws_outposts_outpost.shared.arn
   outpost_az      = data.aws_outposts_outpost.shared.availability_zone
 

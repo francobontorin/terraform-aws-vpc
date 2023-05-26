@@ -1009,7 +1009,7 @@ variable "intra_acl_tags" {
 variable "outpost_subnets" {
   description = "A list of outpost subnets inside the VPC"
   type        = list(string)
-  default     = ["10.0.50.0/24", "10.0.51.0/24"]
+  default     = ["10.0.5.0/24", "10.0.6.0/26", "10.0.7.0/26", "10.0.8.0/26"]
 }
 
 variable "outpost_subnet_assign_ipv6_address_on_creation" {
