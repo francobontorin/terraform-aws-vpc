@@ -889,7 +889,7 @@ resource "aws_vpc" "this" {
 
 resource "aws_subnet" "outpost" {
   # count = local.create_outpost_subnets ? local.len_outpost_subnets : 0
-
+  count                     = local.create_vpc && length(var.outpost_subnets) > 0 ? 1 : 0
   availability_zone         = var.outpost_az
   cidr_block                = element(concat(var.outpost_subnets, [""]), count.index)
   outpost_arn               = var.outpost_arn
