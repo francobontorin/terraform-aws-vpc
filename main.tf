@@ -17,7 +17,7 @@ locals {
   )
 
   # Use `local.vpc_id` to give a hint to Terraform that subnets should be deleted before secondary CIDR blocks can be free!
-  vpc_id = try(aws_vpc_ipv4_cidr_block_association.this[0].vpc_id, aws_vpc.this[0].id, "")
+  vpc_id = aws_vpc.this[0].id
 
   create_vpc = var.create_vpc && var.putin_khuylo
 }
@@ -919,15 +919,15 @@ resource "aws_subnet" "outpost" {
   )
 }
 
-resource "aws_route_table_association" "outpost" {
-  count = local.create_outpost_subnets ? local.len_outpost_subnets : 0
+# resource "aws_route_table_association" "outpost" {
+#   count = local.create_outpost_subnets ? local.len_outpost_subnets : 0
 
-  subnet_id = element(aws_subnet.outpost[*].id, count.index)
-  route_table_id = element(
-    aws_route_table.private[*].id,
-    var.single_nat_gateway ? 0 : count.index,
-  )
-}
+#   subnet_id = element(aws_subnet.outpost[*].id, count.index)
+#   route_table_id = element(
+#     aws_route_table.private[*].id,
+#     var.single_nat_gateway ? 0 : count.index,
+#   )
+# }
 
 ################################################################################
 # Outpost Network ACLs
