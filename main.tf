@@ -26,7 +26,7 @@ locals {
 # VPC
 ################################################################################
 
-resource "aws_vpc" "main" {
+resource "aws_vpc" "this" {
   count       = local.create_vpc ? 1 : 0
   cidr_block  = var.cidr
 
