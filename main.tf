@@ -883,27 +883,20 @@ resource "aws_vpc" "this" {
 # Outpost Subnets
 ################################################################################
 
-locals {
-  create_outpost_subnets = local.create_vpc && local.len_outpost_subnets > 0
-}
+# locals {
+#   create_outpost_subnets = local.create_vpc && local.len_outpost_subnets > 0
+# }
 
 resource "aws_subnet" "outpost" {
-  count = local.create_outpost_subnets ? local.len_outpost_subnets : 0
+  # count = local.create_outpost_subnets ? local.len_outpost_subnets : 0
 
-  availability_zone                              = var.outpost_az
-  cidr_block                                     = element(concat(var.outpost_subnets, [""]), count.index)
-  outpost_arn                                    = var.outpost_arn
-  vpc_id                                         = aws_vpc.this[0].id
+  availability_zone         = var.outpost_az
+  cidr_block                = element(concat(var.outpost_subnets, [""]), count.index)
+  outpost_arn               = var.outpost_arn
+  vpc_id                    = aws_vpc.this[0].id
 
   tags = merge(
-    {
-      Name = try(
-        var.outpost_subnet_names[count.index],
-        format("${var.name}-${var.outpost_subnet_suffix}-%s", var.outpost_az)
-      )
-    },
     var.tags,
-    var.outpost_subnet_tags,
   )
 }
 
