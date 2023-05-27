@@ -26,9 +26,9 @@ locals {
 # VPC
 ################################################################################
 
-resource "aws_vpc" "this" {
-  count       = var.create_vpc ? 1 : 0
-  cidr_block  = var.vpc_cidr
+resource "aws_vpc" "main" {
+  count       = local.create_vpc ? 1 : 0
+  cidr_block  = var.cidr
 
 
   tags = merge(
