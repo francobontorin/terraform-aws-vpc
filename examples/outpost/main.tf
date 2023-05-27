@@ -137,11 +137,11 @@ module "vpc" {
   outpost_subnet_ipv6_prefixes                   = [2, 3, 4]
 
   # NAT Gateway
-  enable_nat_gateway = true
-  single_nat_gateway = true
+  enable_nat_gateway = false
+  single_nat_gateway = false
 
   # Network ACLs
-  outpost_dedicated_network_acl = true
+  outpost_dedicated_network_acl = false
   outpost_inbound_acl_rules     = local.network_acls["outpost_inbound"]
   outpost_outbound_acl_rules    = local.network_acls["outpost_outbound"]
 
