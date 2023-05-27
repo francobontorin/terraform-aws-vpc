@@ -131,14 +131,14 @@ module "vpc" {
   outpost_arn     = data.aws_outposts_outpost.shared.arn
   outpost_az      = data.aws_outposts_outpost.shared.availability_zone
 
-  # IPv6
-  enable_ipv6                                    = false
-  outpost_subnet_assign_ipv6_address_on_creation = false
-  outpost_subnet_ipv6_prefixes                   = [2, 3, 4]
+  # # IPv6
+  # enable_ipv6                                    = false
+  # outpost_subnet_assign_ipv6_address_on_creation = false
+  # outpost_subnet_ipv6_prefixes                   = [2, 3, 4]
 
-  # NAT Gateway
-  enable_nat_gateway = false
-  single_nat_gateway = false
+  # # NAT Gateway
+  # enable_nat_gateway = false
+  # single_nat_gateway = false
 
   # Network ACLs
   outpost_dedicated_network_acl = false
